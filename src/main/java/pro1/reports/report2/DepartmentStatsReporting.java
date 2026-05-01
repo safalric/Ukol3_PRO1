@@ -14,28 +14,69 @@ public class DepartmentStatsReporting {
                 emptyActionsCount(actionsList),
                 maxTeacherScore(actionsList)
         );
-        // TODO 2.5: Oprav testovací data
     }
 
     private static long maxActionStudentsCount(ActionsList actionsList) {
-        // TODO 2.0: Doplň potřebné atributy do třídy apiDataModel.Action
-        // TODO 2.1: Doplň: maximální počet přihlášených studentů na rozvrhové akci
-        return 50;
+        if (actionsList == null || actionsList.items == null) {
+            return 0;
+        }
+
+        long max = 0;
+        for (var action : actionsList.items) {
+            if (action != null && action.studentsCount != null && action.studentsCount > max) {
+                max = action.studentsCount;
+            }
+        }
+        return max;
     }
 
     private static long emptyActionsCount(ActionsList actionsList) {
-        // TODO 2.2: Doplň: počet rozvrhových akcí s 0 studenty
-        return 60;
+        if (actionsList == null || actionsList.items == null) {
+            return 0;
+        }
+
+        long emptyCount = 0;
+        for (var action : actionsList.items) {
+            if (action != null && action.studentsCount != null && action.studentsCount == 0) {
+                emptyCount++;
+            }
+        }
+        return emptyCount;
     }
 
 
     private static long maxTeacherScore(ActionsList actionsList) {
-        // TODO 2.4: Doplň: nejvyšší výsledek dosažený metodou teacherScore mezi všemi učiteli ve vstupních datech
-        return 70;
+        if (actionsList == null || actionsList.items == null) {
+            return 0;
+        }
+
+        long max = 0;
+        for (var action : actionsList.items) {
+            if (action == null || action.teacherId == null) {
+                continue;
+            }
+            var score = teacherScore(action.teacherId, actionsList);
+            if (score > max) {
+                max = score;
+            }
+        }
+        return max;
     }
 
     private static long teacherScore(long teacherId, ActionsList actionsList) {
-        // TODO 2.3: Doplň pomocnou metodu - součet všech přihlášených studentů na akcích daného učitele
-        return 0;
+        if (actionsList == null || actionsList.items == null) {
+            return 0;
+        }
+
+        long total = 0;
+        for (var action : actionsList.items) {
+            if (action == null || action.teacherId == null || action.studentsCount == null) {
+                continue;
+            }
+            if (action.teacherId == teacherId) {
+                total += action.studentsCount;
+            }
+        }
+        return total;
     }
 }
