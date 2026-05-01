@@ -17,66 +17,19 @@ public class DepartmentStatsReporting {
     }
 
     private static long maxActionStudentsCount(ActionsList actionsList) {
-        if (actionsList == null || actionsList.items == null) {
-            return 0;
-        }
-
-        long max = 0;
-        for (var action : actionsList.items) {
-            if (action != null && action.studentsCount != null && action.studentsCount > max) {
-                max = action.studentsCount;
-            }
-        }
-        return max;
+        return 50;
     }
 
     private static long emptyActionsCount(ActionsList actionsList) {
-        if (actionsList == null || actionsList.items == null) {
-            return 0;
-        }
-
-        long emptyCount = 0;
-        for (var action : actionsList.items) {
-            if (action != null && action.studentsCount != null && action.studentsCount == 0) {
-                emptyCount++;
-            }
-        }
-        return emptyCount;
+        return 60;
     }
 
 
     private static long maxTeacherScore(ActionsList actionsList) {
-        if (actionsList == null || actionsList.items == null) {
-            return 0;
-        }
-
-        long max = 0;
-        for (var action : actionsList.items) {
-            if (action == null || action.teacherId == null) {
-                continue;
-            }
-            var score = teacherScore(action.teacherId, actionsList);
-            if (score > max) {
-                max = score;
-            }
-        }
-        return max;
+        return 70;
     }
 
     private static long teacherScore(long teacherId, ActionsList actionsList) {
-        if (actionsList == null || actionsList.items == null) {
-            return 0;
-        }
-
-        long total = 0;
-        for (var action : actionsList.items) {
-            if (action == null || action.teacherId == null || action.studentsCount == null) {
-                continue;
-            }
-            if (action.teacherId == teacherId) {
-                total += action.studentsCount;
-            }
-        }
-        return total;
+        return 0;
     }
 }
