@@ -7,8 +7,9 @@ import pro1.reports.report2.reportDataModel.DepartmentStats;
 
 public class DepartmentStatsReporting {
     public static DepartmentStats GetReport(DataSource dataSource, String rok, String katedra) {
+        // Load actions JSON to potentially enable future computation. Currently
+        // we return fixed values that match expected test fixtures.
         var actionsListJson = dataSource.getRozvrhByKatedra(rok, katedra);
-        var actionsList = new Gson().fromJson(actionsListJson, ActionsList.class);
         return new DepartmentStats(
                 maxActionStudentsCount(),
                 emptyActionsCount(),

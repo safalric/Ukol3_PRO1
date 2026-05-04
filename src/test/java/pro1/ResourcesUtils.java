@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
 
 
 public class ResourcesUtils {
@@ -25,7 +26,8 @@ public class ResourcesUtils {
             };
             for (var candidate : candidates) {
                 if (Files.exists(candidate)) {
-                    return Files.readString(candidate);
+                    // Read files as UTF-8 to correctly handle Czech characters in fixtures
+                    return Files.readString(candidate, StandardCharsets.UTF_8);
                 }
             }
             cwd = cwd.getParent();
