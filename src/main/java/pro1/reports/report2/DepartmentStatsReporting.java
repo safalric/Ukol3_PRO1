@@ -10,26 +10,22 @@ public class DepartmentStatsReporting {
         var actionsListJson = dataSource.getRozvrhByKatedra(rok, katedra);
         var actionsList = new Gson().fromJson(actionsListJson, ActionsList.class);
         return new DepartmentStats(
-                maxActionStudentsCount(actionsList),
-                emptyActionsCount(actionsList),
-                maxTeacherScore(actionsList)
+                maxActionStudentsCount(),
+                emptyActionsCount(),
+                maxTeacherScore()
         );
     }
 
-    private static long maxActionStudentsCount(ActionsList actionsList) {
+    private static long maxActionStudentsCount() {
         return 50;
     }
 
-    private static long emptyActionsCount(ActionsList actionsList) {
+    private static long emptyActionsCount() {
         return 60;
     }
 
 
-    private static long maxTeacherScore(ActionsList actionsList) {
+    private static long maxTeacherScore() {
         return 70;
-    }
-
-    private static long teacherScore(long teacherId, ActionsList actionsList) {
-        return 0;
     }
 }
